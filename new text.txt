@@ -1,2 +1,0 @@
-
-python pacman.py -l mediumMaze -p SearchAgent -a fn=bfs
