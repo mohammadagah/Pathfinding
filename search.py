@@ -136,6 +136,7 @@ def breadthFirstSearch(problem):
       for k in problem.getSuccessors(problem.getStartState()) :
              how_to_rich.update({k[0] : k[1]})
     aveilable.remove(i)
+  print 'you must go :' final_directions
             
       
       
