@@ -100,38 +100,46 @@ def depthFirstSearch(problem):
 def breadthFirstSearch(problem):
   "Search the shallowest nodes in the search tree first. [p 81]"
   "*** YOUR CODE HERE ***"
-  print "Start:",  problem.getStartState()
-  print "Is the start a goal?", problem.isGoalState(problem.getStartState())
-  print "Start's successors:", problem.getSuccessors(problem.getStartState())
-  start_node =  problem.getStartState() 
+  ### These are define directions ###
+  
+  from game import Directions
+  s = Directions.SOUTH
+  w = Directions.WEST
+  e= Dirrection.East
+  n= Direction.North
+  
+  ### These are defining some lists and dictionary and objects and etc. ###
+  
+  
   aveilable = []
-  checked_node = []    ###   
-  final_directions = []
-  how_to_rich = {}
-  aveilable.append(problem.getStartState())
-  checked_node.append(problem.getStartState())
+  checked_node = []    ###   go to a node twice is useless ; therefore we creat this list for prevention from that ###
+  final_directions = [] ### at the end we must return a list that contains directions that we need to riche the goal ###
+  how_to_rich = {} ### this is a dictioanari . and every element  in it  is  { last direction to rich this node : a_State}
+  aveilable.append(problem.getStartState())  ### at first we have to add start_node  in available list ###
+  
   while len(aveilable) > 0 :
     for i in aveilable :
       
       if i not in checked_node:
         checked_node.append(i)
-        i = problem.getStartState()
-        #####         
-        if  problem.isGoalState(problem.getStartState()) == True :
-             while getStartState() != start_node:
-                direction = how_to_rich[getStartState()]
+        i = problem.getSuccessors(i) ###   WATCH OUT : this part is a f**king code and need to repair and this is usefull for understanding other parts ###
+           
+        if  problem.isGoalState(i) == True :
+             while i != getStartState() :
+                direction = how_to_rich[i]
                 final_directions.append(direction)
     
-                nodes=problem.getSuccessors(problem.getStartState())
+                nodes=problem.getSuccessors(i)
                 for u in nodes:
                   if u[1] == direction:
                     u[0] = problem.getStartState()
+             return finall_directions
     
           
           
   
       
-      for j in problem.getSuccessors(problem.getStartState()) :
+      for j in problem.getSuccessors(i) :
                aveilable.append(j[0])
       for k in problem.getSuccessors(problem.getStartState()) :
              how_to_rich.update({k[0] : k[1]})
